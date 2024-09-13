@@ -20,10 +20,21 @@ const HackerRoom = ({ activeSection }) => {
 
   return (
     <group dispose={null}>
-      <mesh geometry={nodes.screen_screens_0.geometry} material={materials.screens}>
-        <meshMatcapMaterial map={screenTexture} /> {/* Use the passed screen texture */}
-      </mesh>
-      <mesh geometry={nodes.screen_glass_glass_0.geometry} material={materials.glass} />
+      {/* Screen Mesh */}
+      {nodes.screen_screens_0?.geometry && (
+        <mesh geometry={nodes.screen_screens_0.geometry}>
+          <meshStandardMaterial
+            map={screenTexture}  // Apply the selected texture for the screen
+            roughness={0}  // Ensure no roughness
+            metalness={0}  // Ensure no metallic effect
+            bumpMap={null}  // Disable bump map (removing any dirt-like textures)
+            normalMap={null}  // Disable normal map
+            aoMap={null}  // Disable ambient occlusion map
+          />
+        </mesh>
+      )}
+
+      {/* Other parts of the desk */}
       <mesh geometry={nodes.table_table_mat_0_1.geometry} material={materials.table_mat} />
       <mesh geometry={nodes.table_table_mat_0_2.geometry} material={materials.computer_mat} />
       <mesh geometry={nodes.table_table_mat_0_3.geometry} material={materials.server_mat} />
@@ -39,6 +50,7 @@ const HackerRoom = ({ activeSection }) => {
     </group>
   );
 };
+
 useGLTF.preload('/models/hacker-room.glb');
 
 export default HackerRoom;

@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import { PerspectiveCamera } from '@react-three/drei';
+import { PerspectiveCamera, Html } from '@react-three/drei';
 import HackerRoom from "../components/HackerRoom";
 import { Suspense, useState } from "react";
 import CanvasLoader from "../components/CanvasLoader";
@@ -11,7 +11,7 @@ import Navbar from "./Navbar"; // Import your existing Navbar
 
 const Hero = () => {
   const [isZoomed, setIsZoomed] = useState(false); // Track if the model is zoomed
-  const [activeSection, setActiveSection] = useState("home"); // Track active section
+  const [activeSection, setActiveSection] = useState("home"); // Track the active section for texture
 
   const isSmall = useMediaQuery({ maxWidth: 440 });
   const isMobile = useMediaQuery({ maxWidth: 768 });
@@ -27,18 +27,22 @@ const Hero = () => {
     config: { mass: 1, tension: 70, friction: 26 },
   });
 
-  // Handle when a nav item is clicked
+  // Handle Navbar clicks
   const handleNavClick = (view) => {
-    setActiveSection(view); // Set the active section (home, about, work, contact)
-    if (view === "about") {
-      setIsZoomed(true); // Trigger zoom animation when "About" is clicked
+    if (view === "home") {
+      setIsZoomed(false); // Zoom out to home
+      setActiveSection("home");
     } else {
-      setIsZoomed(false); // Reset when other links are clicked
+      if (!isZoomed) {
+        setIsZoomed(true); // Trigger zoom animation only once
+      }
+      setActiveSection(view); // Change texture based on the section
     }
   };
 
   const handleZoomOut = () => {
-    setIsZoomed(false); // Reset to the original position when needed
+    setIsZoomed(false); // Zoom out when back button is pressed
+    setActiveSection("home"); // Reset to home view
   };
 
   return (
