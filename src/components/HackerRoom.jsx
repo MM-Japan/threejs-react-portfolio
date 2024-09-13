@@ -2,13 +2,17 @@ import React from "react";
 import { useGLTF, useTexture } from '@react-three/drei';
 
 const HackerRoom = ({ activeSection }) => {
-  const { nodes, materials } = useGLTF('/models/hacker-room.glb');
+  // Use the environment variable for the correct base path, so it works for both local and GitHub Pages
+  const basePath = import.meta.env.BASE_URL;
 
-  // Load textures within the Canvas context
-  const homeTexture = useTexture('/textures/desk/screen.png');
-  const aboutTexture = useTexture('/textures/desk/about.png');
-  const workTexture = useTexture('/textures/desk/work.png');
-  const contactTexture = useTexture('/textures/desk/contact.png');
+  // Load the 3D model using the correct base path
+  const { nodes, materials } = useGLTF(`${basePath}models/hacker-room.glb`);
+
+  // Load textures with the correct base path
+  const homeTexture = useTexture(`${basePath}textures/desk/screen.png`);
+  const aboutTexture = useTexture(`${basePath}textures/desk/about.png`);
+  const workTexture = useTexture(`${basePath}textures/desk/work.png`);
+  const contactTexture = useTexture(`${basePath}textures/desk/contact.png`);
 
   // Choose the right texture based on the active section
   const screenTexture = {
@@ -51,7 +55,7 @@ const HackerRoom = ({ activeSection }) => {
   );
 };
 
-useGLTF.preload('/models/hacker-room.glb'); 
-
+// Preload the model using the correct base path
+useGLTF.preload(`${import.meta.env.BASE_URL}models/hacker-room.glb`);
 
 export default HackerRoom;
