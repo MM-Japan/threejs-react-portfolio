@@ -51,6 +51,7 @@ const HackerRoom = ({ activeSection }) => {
   );
 };
 
-useGLTF.preload('/models/hacker-room.glb');
+useGLTF.preload('/models/hacker-room.glb'); 
+
 
 export default HackerRoom;
