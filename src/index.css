@@ -195,3 +195,15 @@ body {
     transform: rotate(0deg);
   }
 }
+
+.fade-in {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1s ease-in-out, visibility 0s 0s;
+}
+
+.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s ease-in-out, visibility 0s 1s;
+}

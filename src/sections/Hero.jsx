@@ -29,14 +29,12 @@ const Hero = () => {
 
   // Handle Navbar clicks
   const handleNavClick = (view) => {
-    if (view === "home") {
-      setIsZoomed(false); // Zoom out to home
-      setActiveSection("home");
+    if (view === "about" || view === "work" || view === "contact") {
+      setIsZoomed(true); // Trigger zoom animation when any of the sections is clicked
+      setActiveSection(view); // Set the active section
     } else {
-      if (!isZoomed) {
-        setIsZoomed(true); // Trigger zoom animation only once
-      }
-      setActiveSection(view); // Change texture based on the section
+      setIsZoomed(false); // Reset zoom when other links (e.g., "Home") are clicked
+      setActiveSection("home"); // Reset to the home section
     }
   };
 
@@ -51,7 +49,7 @@ const Hero = () => {
       <Navbar handleNavClick={handleNavClick} />
 
       {/* Main Content */}
-      <div className="w-full mx-auto flex flex-col sm:mt-36 mt-20 c-space gap-3">
+      <div className={`w-full mx-auto flex flex-col sm:mt-36 mt-20 c-space gap-3 transition-opacity duration-1000 ${isZoomed ? 'fade-out' : 'fade-in'}`}>
         <p className="sm:text-3xl text-2xl font-medium text-white text-center font-generalsans">
           Hi, I'm Max <span className="waving-hand">🤙</span>
         </p>
