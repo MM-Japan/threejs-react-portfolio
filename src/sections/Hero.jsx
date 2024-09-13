@@ -21,7 +21,7 @@ const Hero = () => {
 
   // Define the animated spring for position, scale, and rotation
   const { position, scale, rotation } = useSpring({
-    position: isZoomed ? [0.5, -6.8, 27] : sizes.deskPosition,
+    position: isZoomed ? sizes.zoomPosition : sizes.deskPosition,
     scale: isZoomed ? [2, 2, 2] : sizes.deskScale,
     rotation: isZoomed ? [Math.PI / 15, -Math.PI, 0] : [0, -Math.PI, 0],
     config: { mass: 1, tension: 70, friction: 26 },
