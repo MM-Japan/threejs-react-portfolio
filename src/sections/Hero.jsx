@@ -88,6 +88,24 @@ const Hero = () => {
           Back
         </button>
       )}
+
+      {/* Transparent link for "work" section */}
+      {activeSection === "work" && (
+        <a
+          href="https://www.chore-quest.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="absolute z-50 " // Seethrough black background for positioning
+          style={{
+            top: '27%',
+            left: '30%', // Adjust to fit over the second monitor
+            width: '320px',
+            height: '420px',
+          }}
+        >
+          {/* You can remove this text or add more styles to make the box clickable */}
+        </a>
+      )}
     </section>
   );
 };
