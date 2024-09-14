@@ -12,6 +12,7 @@ import Navbar from "./Navbar"; // Import your existing Navbar
 const Hero = () => {
   const [isZoomed, setIsZoomed] = useState(false); // Track if the model is zoomed
   const [activeSection, setActiveSection] = useState("home"); // Track the active section for texture
+  const [workZoom, setWorkZoom] = useState(false); // Track if we're zoomed into the work monitor
 
   const isSmall = useMediaQuery({ maxWidth: 440 });
   const isMobile = useMediaQuery({ maxWidth: 768 });
@@ -21,25 +22,32 @@ const Hero = () => {
 
   // Define the animated spring for position, scale, and rotation
   const { position, scale, rotation } = useSpring({
-    position: isZoomed ? sizes.zoomPosition : sizes.deskPosition,
-    scale: isZoomed ? [2, 2, 2] : sizes.deskScale,
-    rotation: isZoomed ? [Math.PI / 15, -Math.PI, 0] : [0, -Math.PI, 0],
+    position: activeSection === "work" ? [sizes.zoomPosition[0] + 3.2, sizes.zoomPosition[1] + 0.4, sizes.zoomPosition[2] - 0.8] : isZoomed ? sizes.zoomPosition : sizes.deskPosition,
+    scale: isZoomed || workZoom ? [2, 2, 2] : sizes.deskScale,
+    rotation: isZoomed || workZoom ? [Math.PI / 15, -Math.PI, 0] : [0, -Math.PI, 0],
     config: { mass: 1, tension: 70, friction: 26 },
   });
 
   // Handle Navbar clicks
   const handleNavClick = (view) => {
-    if (view === "about" || view === "work" || view === "contact") {
-      setIsZoomed(true); // Trigger zoom animation when any of the sections is clicked
-      setActiveSection(view); // Set the active section
+    if (view === "work") {
+      setIsZoomed(true);
+      setWorkZoom(true); // Trigger zoom for the second monitor (work section)
+      setActiveSection(view);
+    } else if (view === "about" || view === "contact") {
+      setIsZoomed(true); // Zoom into the main monitor for about/contact
+      setWorkZoom(false); // Disable work zoom
+      setActiveSection(view);
     } else {
-      setIsZoomed(false); // Reset zoom when other links (e.g., "Home") are clicked
+      setIsZoomed(false); // Reset zoom when "Home" is clicked
+      setWorkZoom(false); // Reset work zoom
       setActiveSection("home"); // Reset to the home section
     }
   };
 
   const handleZoomOut = () => {
     setIsZoomed(false); // Zoom out when back button is pressed
+    setWorkZoom(false); // Reset work zoom
     setActiveSection("home"); // Reset to home view
   };
 
