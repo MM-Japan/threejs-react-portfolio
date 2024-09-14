@@ -199,11 +199,17 @@ body {
 .fade-in {
   opacity: 1;
   visibility: visible;
-  transition: opacity 1s ease-in-out, visibility 0s 0s;
+  transition: opacity 1s ease-in-out, visibility 0s 0s; /* Visibility is visible instantly */
+}
+
+.fade-in-contact {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 2s ease-in-out, visibility 0s 0s; /* Visibility is visible instantly */
 }
 
 .fade-out {
   opacity: 0;
   visibility: hidden;
-  transition: opacity 1s ease-in-out, visibility 0s 1s;
+  transition: opacity 1s ease-in-out, visibility 0s 1s; /* Visibility hidden after 1s */
 }
