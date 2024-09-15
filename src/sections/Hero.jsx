@@ -148,7 +148,7 @@ const Hero = () => {
             <a href="https://github.com/MM-Japan" target="_blank" className="text-decoration-none text-white mx-3">
               <i className="fab fa-github fa-2x"></i>
             </a>
-            <a href="/cv/Web_Developer_CV_Maxim_McCain.pdf" target="_blank" className="text-decoration-none text-white mx-3" download>
+            <a href="/assets/Web Developer CV  - Maxim McCain.pdf" target="_blank" className="text-decoration-none text-white mx-3" download>
               <i className="fa-solid fa-file-arrow-down fa-2x"></i>
             </a>
           </div>
