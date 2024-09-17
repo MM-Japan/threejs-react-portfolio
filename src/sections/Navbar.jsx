@@ -10,7 +10,7 @@ const NavItems = ({ handleNavClick }) => {
             <a
               href={href}
               className='nav-li_a'
-              onClick={() => handleNavClick(name.toLowerCase())} // Call handleNavClick when clicked
+              onClick={() => handleNavClick(name.toLowerCase())}
             >
               {name}
             </a>
@@ -33,7 +33,7 @@ const Navbar = ({ handleNavClick }) => {
       <div className='max-w-7xl mx-auto'>
         <div className="flex justify-between items-center py-5 mx-auto c-space">
           {/* Logo or Name */}
-          <a href="/" className='text-neutral-400 font-bold text-xl hover:text-white transition-colors'>
+          <a href="https://www.maximmccain.com/" className='text-neutral-400 font-bold text-xl hover:text-white transition-colors'>
             Max
           </a>
 
