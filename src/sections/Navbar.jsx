@@ -34,7 +34,7 @@ const Navbar = ({ handleNavClick }) => {
         <div className="flex justify-between items-center py-5 mx-auto c-space">
           {/* Logo or Name */}
           <a href="https://www.maximmccain.com/" className='text-neutral-400 font-bold text-xl hover:text-white transition-colors'>
-            Max
+            Max McCain
           </a>
 
           {/* Full Menu for Desktop */}

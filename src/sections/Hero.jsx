@@ -71,6 +71,21 @@ const Hero = () => {
     setActiveSection("home"); // Reset to home view
   };
 
+  const sections = ["home", "about", "work", "contact"];
+
+  const navigateToNext = () => {
+    const currentIndex = sections.indexOf(activeSection);
+    const nextSection = sections[(currentIndex + 1) % sections.length];
+    handleNavClick(nextSection);
+  };
+
+  const navigateToPrevious = () => {
+    const currentIndex = sections.indexOf(activeSection);
+    const previousSection = sections[(currentIndex - 1 + sections.length) % sections.length];
+    handleNavClick(previousSection);
+  };
+
+
   return (
     <section className="min-h-screen w-full flex flex-col relative">
       {/* Use your existing Navbar and pass the handleNavClick function */}
@@ -154,6 +169,22 @@ const Hero = () => {
           </div>
         </div>
       )}
+
+            {/* Navigation Arrows */}
+      <button
+        onClick={navigateToPrevious}
+        className="absolute left-5 top-1/2 transform -translate-y-1/2 z-50 bg-white text-black p-2 rounded-full"
+      >
+        &#9664; {/* Left arrow */}
+      </button>
+
+      <button
+        onClick={navigateToNext}
+        className="absolute right-5 top-1/2 transform -translate-y-1/2 z-50 bg-white text-black p-2 rounded-full"
+      >
+        &#9654; {/* Right arrow */}
+      </button>
+
     </section>
   );
 };
