@@ -71,19 +71,26 @@ const Hero = () => {
     setActiveSection("home"); // Reset to home view
   };
 
-  const sections = ["home", "about", "work", "contact"];
+  const handleArrowDisplay = (direction) => {
+    if (direction === "left") {
+      return activeSection !== "work" && activeSection !== "home";
+    }
+    if (direction === "right") {
+      return activeSection !== "contact" && activeSection !== "home";
+    }
+    return false;
+  };
 
   const navigateToNext = () => {
-    const currentIndex = sections.indexOf(activeSection);
-    const nextSection = sections[(currentIndex + 1) % sections.length];
-    handleNavClick(nextSection);
+    if (activeSection === "about") handleNavClick("contact");
+    if (activeSection === "work") handleNavClick("about");
   };
 
   const navigateToPrevious = () => {
-    const currentIndex = sections.indexOf(activeSection);
-    const previousSection = sections[(currentIndex - 1 + sections.length) % sections.length];
-    handleNavClick(previousSection);
+    if (activeSection === "about") handleNavClick("work");
+    if (activeSection === "contact") handleNavClick("about");
   };
+
 
 
   return (
@@ -170,20 +177,39 @@ const Hero = () => {
         </div>
       )}
 
-            {/* Navigation Arrows */}
-      <button
-        onClick={navigateToPrevious}
-        className="absolute left-5 top-1/2 transform -translate-y-1/2 z-50 bg-white text-black p-2 rounded-full"
-      >
-        &#9664; {/* Left arrow */}
-      </button>
+      {/* Home Screen Arrow */}
+      {activeSection === "home" && (
+        <button
+          onClick={() => handleNavClick("about")}
+          className="absolute bottom-5 left-1/2 transform -translate-x-1/2 z-50 bg-white text-black p-2 rounded-full transition-opacity duration-1000 fade-in"
+        >
+          &#9650; {/* Up arrow */}
+        </button>
+      )}
 
-      <button
-        onClick={navigateToNext}
-        className="absolute right-5 top-1/2 transform -translate-y-1/2 z-50 bg-white text-black p-2 rounded-full"
-      >
-        &#9654; {/* Right arrow */}
-      </button>
+      {/* Left Arrow */}
+      {handleArrowDisplay("left") && (
+        <button
+          onClick={navigateToPrevious}
+          className={`absolute left-5 top-1/2 transform -translate-y-1/2 z-50 bg-white text-black p-2 rounded-full transition-opacity duration-1000 ${
+            activeSection === "work" ? "fade-out" : "fade-in"
+          }`}
+        >
+          &#9664; {/* Left arrow */}
+        </button>
+      )}
+
+      {/* Right Arrow */}
+      {handleArrowDisplay("right") && (
+        <button
+          onClick={navigateToNext}
+          className={`absolute right-5 top-1/2 transform -translate-y-1/2 z-50 bg-white text-black p-2 rounded-full transition-opacity duration-1000 ${
+            activeSection === "contact" ? "fade-out" : "fade-in"
+          }`}
+        >
+          &#9654; {/* Right arrow */}
+        </button>
+      )}
 
     </section>
   );
